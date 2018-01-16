@@ -11,6 +11,9 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
+  router: {
+    base: '/lightmetro/'
+  },
   /*
   ** Customize the progress bar color
   */
