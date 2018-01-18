@@ -3,9 +3,7 @@
     class="outer"
     @click="tempo += 5"
   >
-    <div
-      class="header"
-      style="background-color: #555; color: #eee;">
+    <div class="header">
       {{ name }}
       {{ tempo }}
     </div>
@@ -51,6 +49,7 @@ export default {
     // tempoが変わる度に呼び出される
     tempo() {
       clearInterval(this.timer);
+      this.timer = null;
       this.newTimer();
     }
   },
@@ -62,6 +61,9 @@ export default {
       this.on = !this.on;
     },
     newTimer() {
+      if (this.timer) {
+        return;
+      }
       this.timer = setInterval(this.flash, 60000.0 / this.tempo);
     }
   }
@@ -69,6 +71,10 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  background-color: #555;
+  color: #eee;
+}
 .on {
   background-color: #555;
 }
