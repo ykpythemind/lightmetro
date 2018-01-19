@@ -15,7 +15,7 @@
       </div>
       <div class="footer">
         <div style="text-align: center; ">
-          <AddButton />
+          <AddButton @event="add" />
         </div>
         <br>
         <a
@@ -50,6 +50,11 @@ export default {
         { tempo: 180, name: 'piyo', color: '#1d4fa2' }
       ]
     };
+  },
+  methods: {
+    add() {
+      this.metros.push({ tempo: 140, name: 'new', color: '#be1c1c' });
+    }
   }
 };
 </script>

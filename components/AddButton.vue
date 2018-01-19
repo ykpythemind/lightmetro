@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button>＋</button>
+    <button @click="$emit('event')">＋</button>
   </div>
 </template>
 
