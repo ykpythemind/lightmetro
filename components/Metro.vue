@@ -67,10 +67,8 @@ export default {
     clickElm(elm) {
       /* eslint-disable indent */
       // [FIXME] prettier auto fix indent
-      console.log(elm);
       switch (elm) {
         case 0:
-          console.log('hey');
           this.tempo -= 5;
           break;
         case 1:
