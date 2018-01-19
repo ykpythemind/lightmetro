@@ -13,7 +13,11 @@
           :color="metro.color"
         />
       </div>
-      <div class="links">
+      <div class="footer">
+        <div style="text-align: center; ">
+          <AddButton />
+        </div>
+        <br>
         <a
           href="https://nuxtjs.org/"
           target="_blank"
@@ -30,11 +34,13 @@
 <script>
 import AppLogo from '~/components/AppLogo.vue';
 import Metro from '~/components/Metro.vue';
+import AddButton from '~/components/AddButton.vue';
 
 export default {
   components: {
     AppLogo,
-    Metro
+    Metro,
+    AddButton
   },
   data() {
     return {
@@ -57,6 +63,7 @@ export default {
 
 .main {
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .title {
@@ -68,7 +75,7 @@ export default {
   letter-spacing: 1px;
 }
 
-.links {
+.footer {
   margin-top: 40px;
 }
 </style>
