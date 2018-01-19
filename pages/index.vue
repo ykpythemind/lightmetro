@@ -21,7 +21,7 @@
         <a
           href="https://github.com/ykpythemind/lightmetro"
           target="_blank"
-          class="button--grey">GitHub</a>
+          class="button--green">GitHub</a>
       </div>
     </div>
   </section>
@@ -39,9 +39,9 @@ export default {
   data() {
     return {
       metros: [
-        { tempo: 100, name: 'hoge', color: '#6a0505' },
-        { tempo: 120, name: 'fuga', color: '#91994b' },
-        { tempo: 180, name: 'piyo', color: '#4b6899' }
+        { tempo: 100, name: 'hoge', color: '#880e0e' },
+        { tempo: 120, name: 'fuga', color: '#b2c130' },
+        { tempo: 180, name: 'piyo', color: '#1d4fa2' }
       ]
     };
   }
@@ -60,21 +60,12 @@ export default {
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* 1 */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 300;
   font-size: 80px;
-  color: #35495e;
   letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
 }
 
 .links {

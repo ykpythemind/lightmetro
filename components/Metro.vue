@@ -2,7 +2,9 @@
   <div class="outer">
     <div class="header">
       {{ name }}
-      {{ tempo }}
+      <strong>
+        {{ tempo }}
+      </strong>
     </div>
     <div
       v-for="beatElm in beatsArray"
@@ -84,7 +86,7 @@ export default {
       }
     },
     flashStyle(state) {
-      return { backgroundColor: state ? this.color : '#FFFFFF' };
+      return { backgroundColor: state ? this.color : '#000000' };
     },
     newTimer() {
       if (this.timer) {
@@ -98,19 +100,20 @@ export default {
 
 <style scoped>
 .header {
-  background-color: #555;
-  color: #eee;
+  background-color: #59c944;
+  color: #0b2230;
+  font-size: 18px;
 }
 .base {
   width: 25%;
   float: left;
   height: 100%;
-  border: 1px solid #eee;
+  border: 1px solid #59c944;
   cursor: pointer;
 }
 .outer {
   clear: both;
   height: 100px;
-  border-bottom: 2px solid #eeeeee;
+  border-bottom: 2px solid #59c944;
 }
 </style>
