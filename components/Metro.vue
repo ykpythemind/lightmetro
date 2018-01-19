@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="outer"
-    @click="tempo += 5"
-  >
+  <div class="outer">
     <div class="header">
       {{ name }}
       {{ tempo }}
@@ -11,6 +8,7 @@
       v-for="beatElm in beatsArray"
       :key="beatElm"
       class="base"
+      @click="clickElm(beatElm)"
       :style="flashStyle(beat == beatElm)" />
   </div>
 </template>
@@ -66,6 +64,27 @@ export default {
         this.beat++;
       }
     },
+    clickElm(elm) {
+      /* eslint-disable indent */
+      // [FIXME] prettier auto fix indent
+      console.log(elm);
+      switch (elm) {
+        case 0:
+          console.log('hey');
+          this.tempo -= 5;
+          break;
+        case 1:
+          this.tempo -= 1;
+          break;
+        case 2:
+          this.tempo += 1;
+          break;
+        case 3:
+          this.tempo += 5;
+          break;
+        /* eslint-enable indent */
+      }
+    },
     flashStyle(state) {
       return { backgroundColor: state ? this.color : '#FFFFFF' };
     },
@@ -89,6 +108,7 @@ export default {
   float: left;
   height: 100%;
   border: 1px solid #eee;
+  cursor: pointer;
 }
 .outer {
   clear: both;
