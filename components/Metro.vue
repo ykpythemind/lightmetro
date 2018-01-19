@@ -8,11 +8,10 @@
       {{ tempo }}
     </div>
     <div
-      class="left-side"
-      :style="{backgroundColor: on ? color : '#fff'}" />
-    <div
-      class="right-side"
-      :style="{backgroundColor: on ? '#fff' : color }" />
+      v-for="beatElm in beatsArray"
+      :key="beatElm"
+      class="base"
+      :style="flashStyle(beat == beatElm)" />
   </div>
 </template>
 
@@ -37,7 +36,9 @@ export default {
     return {
       on: true,
       tempo: this.initialTempo,
-      timer: null
+      timer: null,
+      beat: 0,
+      beatsArray: [0, 1, 2, 3]
     };
   },
   computed: {
@@ -58,7 +59,15 @@ export default {
   },
   methods: {
     flash() {
-      this.on = !this.on;
+      // 0, 1, 2, 3, 0, 1, 2, 3, 0...
+      if (this.beat > 2) {
+        this.beat = 0;
+      } else {
+        this.beat++;
+      }
+    },
+    flashStyle(state) {
+      return { backgroundColor: state ? this.color : '#FFFFFF' };
     },
     newTimer() {
       if (this.timer) {
@@ -75,23 +84,15 @@ export default {
   background-color: #555;
   color: #eee;
 }
-.on {
-  background-color: #555;
+.base {
+  width: 25%;
+  float: left;
+  height: 100%;
+  border: 1px solid #eee;
 }
 .outer {
   clear: both;
   height: 100px;
   border-bottom: 2px solid #eeeeee;
-}
-.left-side {
-  float: left;
-  width: 50%;
-  height: 100%;
-  border-right: 1px dotted #eeeeee;
-}
-.right-side {
-  float: right;
-  width: 50%;
-  height: 100%;
 }
 </style>
