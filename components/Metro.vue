@@ -20,7 +20,7 @@
 <script>
 export default {
   props: {
-    initialTempo: {
+    tempo: {
       require: true,
       type: Number,
       default: 120
@@ -32,12 +32,15 @@ export default {
     color: {
       type: String,
       default: '#222222'
+    },
+    id: {
+      type: Number,
+      default: 0
     }
   },
   data() {
     return {
       on: true,
-      tempo: this.initialTempo,
       timer: null,
       beat: 1
     };
@@ -53,6 +56,9 @@ export default {
   mounted() {
     this.newTimer(this.flash);
   },
+  beforeDestroy() {
+    clearInterval(this.timer);
+  },
   methods: {
     flash() {
       // 1, 2, 3, 4, 1, 2, 3, 4...
@@ -62,21 +68,24 @@ export default {
         this.beat++;
       }
     },
+    setTempo(plus) {
+      this.$emit('setTempo', plus, this.id);
+    },
     clickElm(elmNumber) {
       /* eslint-disable indent */
       // [FIXME] prettier auto fix indent
       switch (elmNumber) {
         case 1:
-          this.tempo -= 5;
+          this.setTempo(-5);
           break;
         case 2:
-          this.tempo -= 1;
+          this.setTempo(-1);
           break;
         case 3:
-          this.tempo += 1;
+          this.setTempo(+1);
           break;
         case 4:
-          this.tempo += 5;
+          this.setTempo(+5);
           break;
         /* eslint-enable indent */
       }

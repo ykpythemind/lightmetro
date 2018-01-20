@@ -8,9 +8,11 @@
         <Metro
           v-for="metro in metros"
           :key="metro.id"
-          :initial-tempo="metro.tempo"
+          :tempo="metro.tempo"
           :name="metro.name"
           :color="metro.color"
+          :id="metro.id"
+          @setTempo="setTempo"
         />
       </div>
       <div class="footer">
@@ -62,7 +64,7 @@ export default {
   },
   data() {
     return {
-      metros: [{ tempo: 100, name: 'hoge', color: '#c1186e', id: 1 }]
+      metros: [{ tempo: 100, name: 'hoge', color: '#c1186e', id: 0 }]
     };
   },
   methods: {
@@ -71,7 +73,7 @@ export default {
         tempo: 120,
         name: 'new',
         color: colorStack.pop() || '#b96992',
-        id: this.metros.length + 1
+        id: this.metros.length
       };
       this.metros.push(newData);
     },
@@ -81,6 +83,9 @@ export default {
       }
       const old = this.metros.pop();
       colorStack.push(old.color);
+    },
+    setTempo(plus, id) {
+      this.metros[id].tempo += plus;
     }
   }
 };
@@ -94,7 +99,7 @@ export default {
 }
 
 .main {
-  margin-top: 1rem;
+  margin-top: 5px;
   margin-bottom: 1rem;
 }
 
