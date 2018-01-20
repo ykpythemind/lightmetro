@@ -28,7 +28,6 @@ html {
 
 .button--green {
   display: inline-block;
-  border-radius: 4px;
   border: 1px solid #59c944;
   color: #59c944;
   text-decoration: none;

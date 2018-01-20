@@ -14,8 +14,17 @@
         />
       </div>
       <div class="footer">
-        <div style="text-align: center; ">
-          <AddButton @event="add" />
+        <div
+          style="text-align: center;"
+        >
+          <AddButton
+            @event="add"
+            class="float-left"
+          />
+          <AddButton
+            @event="del"
+            :positive="false"
+          />
         </div>
         <br>
         <a
@@ -40,7 +49,7 @@ const colorStack = [
   '#44e622',
   '#be1c1c',
   '#0ef7a3',
-  '#c7175c',
+  '#e87018',
   '#e7eb2e',
   '#3e6de9'
 ];
@@ -65,6 +74,13 @@ export default {
         id: this.metros.length + 1
       };
       this.metros.push(newData);
+    },
+    del() {
+      if (this.metros.length < 2) {
+        return;
+      }
+      const old = this.metros.pop();
+      colorStack.push(old.color);
     }
   }
 };
