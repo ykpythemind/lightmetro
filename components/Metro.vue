@@ -8,11 +8,11 @@
     </div>
     <div class="outer">
       <div
-        v-for="beatElm in beatsArray"
-        :key="beatElm"
+        v-for="count in 4"
+        :key="count"
         class="base"
-        @click="clickElm(beatElm)"
-        :style="flashStyle(beat == beatElm)" />
+        @click="clickElm(count)"
+        :style="flashStyle(beat == count)" />
     </div>
   </div>
 </template>
@@ -39,14 +39,8 @@ export default {
       on: true,
       tempo: this.initialTempo,
       timer: null,
-      beat: 0,
-      beatsArray: [0, 1, 2, 3]
+      beat: 1
     };
-  },
-  computed: {
-    oneTime() {
-      return 60000.0 / this.tempo;
-    }
   },
   watch: {
     // tempoが変わる度に呼び出される
@@ -61,27 +55,27 @@ export default {
   },
   methods: {
     flash() {
-      // 0, 1, 2, 3, 0, 1, 2, 3, 0...
-      if (this.beat > 2) {
-        this.beat = 0;
+      // 1, 2, 3, 4, 1, 2, 3, 4...
+      if (this.beat > 3) {
+        this.beat = 1;
       } else {
         this.beat++;
       }
     },
-    clickElm(elm) {
+    clickElm(elmNumber) {
       /* eslint-disable indent */
       // [FIXME] prettier auto fix indent
-      switch (elm) {
-        case 0:
+      switch (elmNumber) {
+        case 1:
           this.tempo -= 5;
           break;
-        case 1:
+        case 2:
           this.tempo -= 1;
           break;
-        case 2:
+        case 3:
           this.tempo += 1;
           break;
-        case 3:
+        case 4:
           this.tempo += 5;
           break;
         /* eslint-enable indent */
