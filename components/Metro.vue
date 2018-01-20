@@ -1,17 +1,19 @@
 <template>
-  <div class="outer">
+  <div>
     <div class="header">
       {{ name }}
       <strong>
         {{ tempo }}
       </strong>
     </div>
-    <div
-      v-for="beatElm in beatsArray"
-      :key="beatElm"
-      class="base"
-      @click="clickElm(beatElm)"
-      :style="flashStyle(beat == beatElm)" />
+    <div class="outer">
+      <div
+        v-for="beatElm in beatsArray"
+        :key="beatElm"
+        class="base"
+        @click="clickElm(beatElm)"
+        :style="flashStyle(beat == beatElm)" />
+    </div>
   </div>
 </template>
 
@@ -103,17 +105,22 @@ export default {
   background-color: #59c944;
   color: #0b2230;
   font-size: 18px;
+  width: 100%;
 }
 .base {
   width: 25%;
-  float: left;
   height: 100%;
-  border: 1px solid #59c944;
+  border-right: 1px solid #59c944;
+  border-bottom: 1px solid #59c944;
   cursor: pointer;
 }
+.base:last-child {
+  border-right: none;
+}
 .outer {
-  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   height: 100px;
-  border-bottom: 2px solid #59c944;
 }
 </style>
