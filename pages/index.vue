@@ -82,7 +82,7 @@ export default {
     'Helvetica Neue', Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 300;
-  font-size: 80px;
+  font-size: 60px;
   letter-spacing: 1px;
 }
 
