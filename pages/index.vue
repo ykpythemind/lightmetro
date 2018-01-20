@@ -7,7 +7,7 @@
       <div class="main">
         <Metro
           v-for="metro in metros"
-          :key="metro.name"
+          :key="metro.id"
           :initial-tempo="metro.tempo"
           :name="metro.name"
           :color="metro.color"
@@ -45,15 +45,21 @@ export default {
   data() {
     return {
       metros: [
-        { tempo: 100, name: 'hoge', color: '#880e0e' },
-        { tempo: 120, name: 'fuga', color: '#b2c130' },
-        { tempo: 180, name: 'piyo', color: '#1d4fa2' }
+        { tempo: 100, name: 'hoge', color: '#880e0e', id: 1 },
+        { tempo: 120, name: 'fuga', color: '#b2c130', id: 2 },
+        { tempo: 180, name: 'piyo', color: '#1d4fa2', id: 3 }
       ]
     };
   },
   methods: {
     add() {
-      this.metros.push({ tempo: 140, name: 'new', color: '#be1c1c' });
+      const newData = {
+        tempo: 140,
+        name: 'new',
+        color: '#be1c1c',
+        id: this.metros.length + 1
+      };
+      this.metros.push(newData);
     }
   }
 };
