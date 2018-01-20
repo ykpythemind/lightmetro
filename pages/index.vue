@@ -36,6 +36,15 @@ import AppLogo from '~/components/AppLogo.vue';
 import Metro from '~/components/Metro.vue';
 import AddButton from '~/components/AddButton.vue';
 
+const colorStack = [
+  '#44e622',
+  '#be1c1c',
+  '#0ef7a3',
+  '#c7175c',
+  '#e7eb2e',
+  '#3e6de9'
+];
+
 export default {
   components: {
     AppLogo,
@@ -44,19 +53,15 @@ export default {
   },
   data() {
     return {
-      metros: [
-        { tempo: 100, name: 'hoge', color: '#880e0e', id: 1 },
-        { tempo: 120, name: 'fuga', color: '#b2c130', id: 2 },
-        { tempo: 180, name: 'piyo', color: '#1d4fa2', id: 3 }
-      ]
+      metros: [{ tempo: 100, name: 'hoge', color: '#c1186e', id: 1 }]
     };
   },
   methods: {
     add() {
       const newData = {
-        tempo: 140,
+        tempo: 120,
         name: 'new',
-        color: '#be1c1c',
+        color: colorStack.pop() || '#b96992',
         id: this.metros.length + 1
       };
       this.metros.push(newData);
