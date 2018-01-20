@@ -1,17 +1,19 @@
 <template>
-  <div class="outer">
+  <div>
     <div class="header">
       {{ name }}
       <strong>
         {{ tempo }}
       </strong>
     </div>
-    <div
-      v-for="beatElm in beatsArray"
-      :key="beatElm"
-      class="base"
-      @click="clickElm(beatElm)"
-      :style="flashStyle(beat == beatElm)" />
+    <div class="outer">
+      <div
+        v-for="count in 4"
+        :key="count"
+        class="base"
+        @click="clickElm(count)"
+        :style="flashStyle(beat == count)" />
+    </div>
   </div>
 </template>
 
@@ -37,14 +39,8 @@ export default {
       on: true,
       tempo: this.initialTempo,
       timer: null,
-      beat: 0,
-      beatsArray: [0, 1, 2, 3]
+      beat: 1
     };
-  },
-  computed: {
-    oneTime() {
-      return 60000.0 / this.tempo;
-    }
   },
   watch: {
     // tempoが変わる度に呼び出される
@@ -59,27 +55,27 @@ export default {
   },
   methods: {
     flash() {
-      // 0, 1, 2, 3, 0, 1, 2, 3, 0...
-      if (this.beat > 2) {
-        this.beat = 0;
+      // 1, 2, 3, 4, 1, 2, 3, 4...
+      if (this.beat > 3) {
+        this.beat = 1;
       } else {
         this.beat++;
       }
     },
-    clickElm(elm) {
+    clickElm(elmNumber) {
       /* eslint-disable indent */
       // [FIXME] prettier auto fix indent
-      switch (elm) {
-        case 0:
+      switch (elmNumber) {
+        case 1:
           this.tempo -= 5;
           break;
-        case 1:
+        case 2:
           this.tempo -= 1;
           break;
-        case 2:
+        case 3:
           this.tempo += 1;
           break;
-        case 3:
+        case 4:
           this.tempo += 5;
           break;
         /* eslint-enable indent */
@@ -103,17 +99,22 @@ export default {
   background-color: #59c944;
   color: #0b2230;
   font-size: 18px;
+  width: 100%;
 }
 .base {
   width: 25%;
-  float: left;
   height: 100%;
-  border: 1px solid #59c944;
+  border-right: 1px solid #59c944;
+  border-bottom: 1px solid #59c944;
   cursor: pointer;
 }
+.base:last-child {
+  border-right: none;
+}
 .outer {
-  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   height: 100px;
-  border-bottom: 2px solid #59c944;
 }
 </style>
