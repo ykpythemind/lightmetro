@@ -21,7 +21,6 @@
         >
           <AddButton
             @event="add"
-            class="float-left"
           />
           <AddButton
             @event="del"
