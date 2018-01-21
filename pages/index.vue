@@ -38,6 +38,15 @@
           target="_blank"
           class="button--green">GitHub</a>
       </div>
+      <div style="text-align: right; margin-top: 1rem;">
+        <a
+          class="button--mini"
+          @click.prevent="clearStorageData"
+          href="#"
+        >
+          Clear Saved Data
+        </a>
+      </div>
     </div>
   </section>
 </template>
@@ -56,6 +65,8 @@ const colorStack = [
   '#3e6de9'
 ];
 
+const initialData = [{ tempo: 100, name: 'hoge', color: '#c1186e', id: 0 }];
+
 export default {
   components: {
     AppLogo,
@@ -64,8 +75,16 @@ export default {
   },
   data() {
     return {
-      metros: [{ tempo: 100, name: 'hoge', color: '#c1186e', id: 0 }]
+      metros: initialData
     };
+  },
+  watch: {
+    metros() {
+      this.save();
+    }
+  },
+  mounted() {
+    this.load();
   },
   methods: {
     add() {
@@ -86,6 +105,27 @@ export default {
     },
     setTempo(plus, id) {
       this.metros[id].tempo += plus;
+    },
+    save() {
+      localStorage.setItem('key', JSON.stringify(this.metros));
+    },
+    load() {
+      const rawData = localStorage.getItem('key');
+      if (rawData) {
+        try {
+          this.metros = JSON.parse(rawData);
+        } catch (e) {
+          console.error('parse error', e); // eslint-disable-line no-console
+          this.metros = initialData;
+        }
+      }
+    },
+    clearStorageData() {
+      const result = window.confirm('clear data?');
+      if (result) {
+        localStorage.clear();
+        this.metros = initialData;
+      }
     }
   }
 };

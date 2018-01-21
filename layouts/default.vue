@@ -42,4 +42,10 @@ html {
 .button--green:last-child {
   margin-left: 15px;
 }
+
+.button--mini {
+  display: inline-block;
+  color: #59c944;
+  padding: 10px 30px;
+}
 </style>
