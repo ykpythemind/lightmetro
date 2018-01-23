@@ -15,10 +15,11 @@
           @setTempo="setTempo"
         />
       </div>
-      <div class="footer">
-        <div
-          style="text-align: center;"
-        >
+      <div
+        class="footer"
+        v-show="loaded"
+      >
+        <div style="text-align: center;">
           <AddButton
             @event="add"
           />
@@ -37,7 +38,10 @@
           target="_blank"
           class="button--green">GitHub</a>
       </div>
-      <div style="text-align: right; margin-top: 1rem;">
+      <div
+        style="text-align: right; margin-top: 1rem;"
+        v-show="loaded"
+      >
         <a
           class="button--mini"
           @click.prevent="clearStorageData"
@@ -76,7 +80,8 @@ export default {
   },
   data() {
     return {
-      metros: initialData
+      metros: [],
+      loaded: false
     };
   },
   watch: {
@@ -127,7 +132,10 @@ export default {
           console.error('parse error', e); // eslint-disable-line no-console
           this.metros = initialData;
         }
+      } else {
+        this.metros = initialData;
       }
+      this.loaded = true;
     },
     clearStorageData() {
       const result = window.confirm('clear data?');
