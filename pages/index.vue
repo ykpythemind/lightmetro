@@ -122,6 +122,7 @@ export default {
           this.metros = JSON.parse(rawData);
         } catch (e) {
           console.error('parse error', e); // eslint-disable-line no-console
+          initialLoad = true;
           this.metros = initialData;
         }
       } else {
