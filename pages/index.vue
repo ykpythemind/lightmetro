@@ -60,16 +60,7 @@ import Metro from '~/components/Metro.vue';
 import AddButton from '~/components/AddButton.vue';
 import _ from 'lodash';
 
-const colorStack = [
-  '#44e622',
-  '#be1c1c',
-  '#0ef7a3',
-  '#e87018',
-  '#e7eb2e',
-  '#3e6de9'
-];
-
-const initialData = [{ tempo: 100, name: 'hoge', color: '#c1186e', id: 0 }];
+const initialData = [{ tempo: 100, name: 'hoge', color: '#3e6de9', id: 0 }];
 let initialLoad = false;
 
 export default {
@@ -81,7 +72,8 @@ export default {
   data() {
     return {
       metros: [],
-      loaded: false
+      loaded: false,
+      colors: ['#44e622', '#e82525', '#0ef7a3', '#4fb1e2', '#e7eb2e', '#ed3191']
     };
   },
   watch: {
@@ -98,7 +90,7 @@ export default {
       const newData = {
         tempo: 120,
         name: 'new',
-        color: colorStack.pop() || '#b96992',
+        color: this.getColor(),
         id: this.metros.length
       };
       this.metros.push(newData);
@@ -107,8 +99,7 @@ export default {
       if (this.metros.length <= 1) {
         return;
       }
-      const old = this.metros.pop();
-      colorStack.push(old.color);
+      this.metros.pop();
     },
     setTempo(plus, id) {
       this.metros[id].tempo += plus;
@@ -143,6 +134,18 @@ export default {
         localStorage.clear();
         this.metros = initialData;
       }
+    },
+    getColor() {
+      // get unused color from array and return random color
+      // [TODO] refactor
+      const used = _.keys(_.groupBy(this.metros, 'color'));
+      const filtered = _.filter(this.colors, o => {
+        return !_.includes(used, o);
+      });
+      return (
+        filtered[_.random(0, filtered.length - 1)] ||
+        this.colors[_.random(0, this.colors.length - 1)]
+      );
     }
   }
 };
