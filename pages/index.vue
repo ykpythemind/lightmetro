@@ -99,7 +99,7 @@ export default {
       this.metros.push(newData);
     },
     del() {
-      if (this.metros.length < 2) {
+      if (this.metros.length <= 1) {
         return;
       }
       const old = this.metros.pop();
