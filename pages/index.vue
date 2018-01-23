@@ -12,6 +12,7 @@
           :name="metro.name"
           :color="metro.color"
           :id="metro.id"
+          :all-metro-count="metros.length"
           @setTempo="setTempo"
         />
       </div>

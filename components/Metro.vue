@@ -12,7 +12,7 @@
         :key="count"
         class="base"
         @click="clickElm(count)"
-        :style="flashStyle(beat == count)" />
+        :style="style(beat == count)" />
     </div>
   </div>
 </template>
@@ -36,6 +36,10 @@ export default {
     id: {
       type: Number,
       default: 0
+    },
+    allMetroCount: {
+      type: Number,
+      default: 1
     }
   },
   data() {
@@ -44,6 +48,12 @@ export default {
       timer: null,
       beat: 1
     };
+  },
+  computed: {
+    height() {
+      const h = 500 / this.allMetroCount;
+      return h > 170 ? 170 : h;
+    }
   },
   watch: {
     // tempoが変わる度に呼び出される
@@ -90,8 +100,14 @@ export default {
         /* eslint-enable indent */
       }
     },
-    flashStyle(state) {
-      return { backgroundColor: state ? this.color : '#000000' };
+    flashBackgroundStyle(state) {
+      return state ? this.color : '#000000';
+    },
+    style(state) {
+      return {
+        backgroundColor: this.flashBackgroundStyle(state),
+        height: `${this.height}px`
+      };
     },
     newTimer() {
       if (this.timer) {
@@ -124,6 +140,5 @@ export default {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: 100px;
 }
 </style>
