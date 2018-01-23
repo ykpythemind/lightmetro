@@ -54,6 +54,7 @@
 import AppLogo from '~/components/AppLogo.vue';
 import Metro from '~/components/Metro.vue';
 import AddButton from '~/components/AddButton.vue';
+import _ from 'lodash';
 
 const colorStack = [
   '#44e622',
@@ -65,6 +66,7 @@ const colorStack = [
 ];
 
 const initialData = [{ tempo: 100, name: 'hoge', color: '#c1186e', id: 0 }];
+let initialLoad = false;
 
 export default {
   components: {
@@ -79,6 +81,7 @@ export default {
   },
   watch: {
     metros() {
+      // 要素の追加・削除はwatchするが内部のオブジェクトは監視されないようだ
       this.save();
     }
   },
@@ -96,7 +99,7 @@ export default {
       this.metros.push(newData);
     },
     del() {
-      if (this.metros.length < 2) {
+      if (this.metros.length <= 1) {
         return;
       }
       const old = this.metros.pop();
@@ -104,10 +107,17 @@ export default {
     },
     setTempo(plus, id) {
       this.metros[id].tempo += plus;
+      this.save();
     },
-    save() {
+    // 変更されてから1秒間は保存せずに待つ
+    save: _.debounce(function() {
+      if (!initialLoad) {
+        // 初回の$dataマウント時にも保存が走るので
+        initialLoad = true;
+        return;
+      }
       localStorage.setItem('key', JSON.stringify(this.metros));
-    },
+    }, 1000),
     load() {
       const rawData = localStorage.getItem('key');
       if (rawData) {
