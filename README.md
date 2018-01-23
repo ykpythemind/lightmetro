@@ -1,6 +1,12 @@
 # lightmetro
 
-> Nuxt.js project
+Visual metronome for live performance
+
+* Target for web browser in your smartphone or tablet
+* Auto save to local storage
+* Multiple songs support
+
+Available at https://ykpythemind.github.io/lightmetro/
 
 ## Build Setup
 
