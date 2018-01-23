@@ -51,8 +51,8 @@ export default {
   },
   computed: {
     height() {
-      const h = 500 / this.allMetroCount;
-      return h > 170 ? 170 : h;
+      const h = (window.innerHeight - 100) / this.allMetroCount;
+      return h > 100 ? 100 : h;
     }
   },
   watch: {
